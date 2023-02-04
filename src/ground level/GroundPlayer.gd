@@ -7,12 +7,12 @@ class_name GroundPlayer
 var fall_acceleration = -210
 var roll_time = 0
 var roll_damage_scale = .5
-var roll_launch_scale = 450
-var max_charge_time = 3
+var roll_launch_scale = 600
+var max_charge_time = 2
 var launching_time = 1
 var current_launch_timer = 0
 var last_direction = -1
-export(float) var damage_scalar = 10
+export(float) var damage_scalar = 10.0
 var damage_to_deal = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -26,7 +26,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity.y -= fall_acceleration * delta;
-	var snap_vector = Vector2.ZERO
 	if direction.x != 0:
 		last_direction = sign(direction.x)
 	
@@ -40,21 +39,21 @@ func _process(delta):
 			sprite.modulate = Color(1, .14, .96, 1)
 		velocity.x = (direction.x) * speed
 		if Input.is_action_pressed("special") and roll_time < max_charge_time:
-			velocity.x = 0;
+			velocity.x = direction.x * speed * .1;
 			roll_time += delta
 			sprite.modulate = Color(1, 0, 0, 1)
 		elif roll_time > 0:
-			velocity.x = roll_time * roll_launch_scale * last_direction
+			velocity.x = (roll_time + .2) * roll_launch_scale * last_direction
 			velocity.y = roll_time * roll_launch_scale * -.1
 			sprite.modulate = Color(0, 1, 0, 1)
-			current_launch_timer = launching_time
+			current_launch_timer = roll_time *1.5
 			get_node("Area2D").monitoring = true
 			damage_to_deal = roll_time * damage_scalar
 			roll_time = 0
 #	pass
 
 func _on_Area2D_area_entered(area):
-	print_debug("floppy")
+	pass
 	
 func handle_movement(delta):
 	if (current_launch_timer > 0):
@@ -85,7 +84,5 @@ func _on_Area2D_body_entered(body):
 	if body is BreakableWall:
 		body.handle_damage(damage_to_deal)
 	if not body == self:
-		
 		current_launch_timer = 0
-	print_debug(body)
 	pass # Replace with function body.
