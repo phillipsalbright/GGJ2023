@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Actor",
 "language": "GDScript",
 "path": "res://src/Actor.gd"
+}, {
+"base": "StaticBody2D",
+"class": "BreakablePlatform",
+"language": "GDScript",
+"path": "res://src/flying level/BreakablePlatform.gd"
 } ]
 _global_script_class_icons={
-"Actor": ""
+"Actor": "",
+"BreakablePlatform": ""
 }
 
 [application]
@@ -96,6 +102,7 @@ move_down={
 
 2d_physics/layer_1="environment"
 2d_physics/layer_2="player"
+2d_physics/layer_3="platform"
 
 [physics]
 
