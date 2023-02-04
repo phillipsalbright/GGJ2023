@@ -9,6 +9,7 @@ export(bool) var is_player = true
 export(int) var speed = 300
 export(int) var jump_force = 600
 export(int) var acceleration = 1500
+export(int) var health = 50
 
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
@@ -50,3 +51,6 @@ func short_hop():
 func handle_movement(delta):
 	velocity.x = move_toward(velocity.x, direction.x * speed, delta * acceleration)
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector2.UP, true, 4, 0.8)
+	
+func handle_damage(damage):
+	health -= damage

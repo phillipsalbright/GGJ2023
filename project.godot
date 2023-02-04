@@ -13,9 +13,27 @@ _global_script_classes=[ {
 "class": "Actor",
 "language": "GDScript",
 "path": "res://src/Actor.gd"
+}, {
+"base": "StaticBody2D",
+"class": "BreakableWall",
+"language": "GDScript",
+"path": "res://BreakableWall.gd"
+}, {
+"base": "Actor",
+"class": "GroundPlayer",
+"language": "GDScript",
+"path": "res://src/ground level/GroundPlayer.gd"
+}, {
+"base": "Actor",
+"class": "GroundRabbit",
+"language": "GDScript",
+"path": "res://src/ground level/GroundRabbit.gd"
 } ]
 _global_script_class_icons={
-"Actor": ""
+"Actor": "",
+"BreakableWall": "",
+"GroundPlayer": "",
+"GroundRabbit": ""
 }
 
 [application]
