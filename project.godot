@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://src/Actor.gd"
 }, {
 "base": "StaticBody2D",
+"class": "BreakablePlatform",
+"language": "GDScript",
+"path": "res://src/flying level/BreakablePlatform.gd"
+}, {
+"base": "StaticBody2D",
 "class": "BreakableWall",
 "language": "GDScript",
 "path": "res://BreakableWall.gd"
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actor": "",
+"BreakablePlatform": "",
 "BreakableWall": "",
 "GroundPlayer": "",
 "GroundRabbit": ""
@@ -114,6 +120,7 @@ move_down={
 
 2d_physics/layer_1="environment"
 2d_physics/layer_2="player"
+2d_physics/layer_3="platform"
 
 [physics]
 

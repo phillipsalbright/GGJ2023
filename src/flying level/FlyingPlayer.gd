@@ -25,15 +25,22 @@ func _physics_process(delta):
 	
 	if $AirBoostDuration.time_left > 0:
 		velocity.y = move_toward(velocity.y, -air_boost_speed, air_boost_acceleration * delta)
-		sprite.modulate = Color.green
+		sprite.modulate = Color(0.8, 1, 0.8, 1)
 	elif hover:
-		sprite.modulate = Color.red
+		sprite.modulate = Color(1, 0.8, 0.8, 1)
 		if Input.is_action_pressed("move_down"):
 			velocity.y = move_toward(velocity.y, hover_fall_speed, hover_friction * delta)
 		else:
 			velocity.y = move_toward(velocity.y, hover_speed, hover_friction * delta)
 	else:
 		sprite.modulate = Color.white
+	
+	
+	for i in get_slide_count():
+		var collider = get_slide_collision(i).collider
+		if collider is BreakablePlatform:
+			collider.step_on_branch()
+
 
 # Overriding parent apply_gravity
 func apply_gravity(delta):

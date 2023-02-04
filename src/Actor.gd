@@ -36,6 +36,11 @@ func apply_gravity(delta):
 func get_input_direction():
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	
+	if direction.x > 0:
+		sprite.flip_h = false
+	elif direction.x < 0:
+		sprite.flip_h = true
+	
 	if Input.is_action_just_pressed("jump") && is_on_floor():
 		velocity.y = -jump_force
 		snap_vector = Vector2.ZERO
