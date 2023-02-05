@@ -229,7 +229,7 @@ position = Vector2( 3585.49, -21.7295 )
 scale = Vector2( 3.5, 3.5 )
 
 [node name="BreakableWall5" parent="LevelObjects" instance=ExtResource( 3 )]
-position = Vector2( 4674.92, -166.189 )
+position = Vector2( 4674.92, -171.234 )
 scale = Vector2( 3.09345, 4.64794 )
 
 [node name="BreakableWall6" parent="LevelObjects" instance=ExtResource( 3 )]

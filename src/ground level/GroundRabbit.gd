@@ -33,6 +33,7 @@ func _process(delta):
 			state = 2
 			pass
 		2:
+			$AnimationPlayer.play("Shooting")
 			$PhaseTimer.start(5)
 			$BulletTimer.paused = false
 			$BulletTimer.start()
@@ -51,6 +52,7 @@ func _process(delta):
 				state = 6
 		5:
 			$BulletTimer.stop()
+			$AnimationPlayer.play("standing")
 			local_timer += delta
 			velocity.x = player_target * speed
 			$Area2D.monitoring = true
@@ -66,6 +68,7 @@ func _process(delta):
 				reset_timer = 0
 				$BulletTimer.wait_time = 1
 		7:
+			$AnimationPlayer.play("standing")
 			reset_timer += delta
 			$BulletTimer.paused = true
 			$PhaseTimer.stop()
@@ -90,6 +93,10 @@ func _process(delta):
 			state = 0
 		_:
 			pass
+	if direction.x > 0:
+		$Sprite.flip_h = false
+	elif direction.x < 0:
+		$Sprite.flip_h = true
 
 func set_state(state_change):
 	state = state_change
@@ -107,6 +114,7 @@ func _on_BulletTimer_timeout():
 	var bullet = BULLET.instance()
 	get_parent().add_child(bullet)
 	bullet.direction = (player.global_position - global_position).normalized()
+	direction.x = sign(bullet.direction.x)
 	bullet.global_position = global_position
 	pass # Replace with function body.
 
