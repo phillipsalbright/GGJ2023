@@ -234,7 +234,7 @@ scale = Vector2( 3.09345, 4.64794 )
 
 [node name="BreakableWall6" parent="LevelObjects" instance=ExtResource( 3 )]
 position = Vector2( 3891.23, -170.945 )
-scale = Vector2( 3.09345, 4.64794 )
+scale = Vector2( 3.2, 5 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="LevelObjects"]
 position = Vector2( 1424, 2.99996 )
