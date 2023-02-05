@@ -32,17 +32,17 @@ func _on_Quit_pressed():
 
 
 func _on_Water_Level_pressed():
-	get_tree().change_scene("res://src/water level/WaterLevel.tscn")
+	get_tree().change_scene("res://src/water level/WaterTutorial.tscn")
 	pass # Replace with function body.
 
 
 func _on_Ground_Level_pressed():
-	get_tree().change_scene("res://src/ground level/GroundLevel.tscn")
+	get_tree().change_scene("res://src/ground level/GroundTutorial.tscn")
 	pass # Replace with function body.
 
 
 func _on_Air_Level_pressed():
-	get_tree().change_scene("res://src/flying level/FlyingLevel.tscn")
+	get_tree().change_scene("res://src/flying level/FlyingTutorial.tscn")
 	pass # Replace with function body.
 
 
