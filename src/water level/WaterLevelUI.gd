@@ -9,10 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$HPLabel.text = "HP: " + str(player.health)
-	
-	$ProgressBar.value = ($Timer.wait_time - $Timer.time_left)
-
+	pass
 
 func _on_Timer_timeout():
 	$WinText.show()

@@ -21,8 +21,8 @@ var cooldownTimer = 0
 func _ready():
 	#speed = 70
 	get_node("Area2D").monitoring = false
-	$HealthBar/ProgressBar.max_value = max_health
-	$HealthBar/ProgressBar.value = health
+	$HealthBar/TextureProgress.max_value = max_health
+	$HealthBar/TextureProgress.value = health
 	pass # Replace with function body.
 
 
@@ -57,7 +57,7 @@ func _process(delta):
 			$AnimationPlayer.play("Running")
 			current_launch_timer = roll_time * .7 + .3
 			get_node("Area2D").monitoring = true
-			damage_to_deal = roll_time * damage_scalar + 2
+			damage_to_deal = roll_time * damage_scalar * .8 + 2
 			cooldownTimer = current_launch_timer + .4
 			roll_time = 0
 #	pass
@@ -111,7 +111,7 @@ func handle_damage(damage):
 		hurt_time = 2
 		if (health <= 0):
 			$DeathScreen.player_died()
-	$HealthBar/ProgressBar.value = health
+	$HealthBar/TextureProgress.value = health
 	
 
 
