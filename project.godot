@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "StaticBody2D",
 "class": "BreakableWall",
 "language": "GDScript",
-"path": "res://BreakableWall.gd"
+"path": "res://src/ground level/BreakableWall.gd"
 }, {
 "base": "Node2D",
 "class": "GroundBossFightManager",
 "language": "GDScript",
-"path": "res://GroundBossFightManager.gd"
+"path": "res://src/ground level/GroundBossFightManager.gd"
 }, {
 "base": "Actor",
 "class": "GroundPlayer",
@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GGJ2023"
-run/main_scene="res://src/water level/WaterLevel.tscn"
+run/main_scene="res://src/ground level/GroundLevel.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -124,6 +124,12 @@ move_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+ ]
+}
+pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

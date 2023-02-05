@@ -9,10 +9,14 @@ var state = 0
 const BULLET = preload("res://src/Bullet.tscn")
 onready var player = get_parent().get_parent().get_node("Player")
 var bush_loc
+var local_timer = 0
+var player_target = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	max_health = 20
+	health = 20
 	pass # Replace with function body.
 
 
@@ -25,27 +29,52 @@ func _process(delta):
 		1:
 			$BulletTimer.paused = true
 			global_position = get_parent().get_random_bush_location()
+			velocity = Vector2.ZERO
 			bush_loc = global_position
-			print_debug(bush_loc)
 			state = 2
 			pass
 		2:
-			$PhaseTimer.start(10)
+			$PhaseTimer.start(5)
 			$BulletTimer.paused = false
 			$BulletTimer.start()
 			state = 3
 		3:
 			pass
 		4:
+			var ydist = abs(global_position.y - player.global_position.y)
+			local_timer = 0
+			if ydist < 1:
+				state = 5
+				player_target = player.global_position
+			else:
+				$BulletTimer.wait_time = .4
+				state = 6
+		5:
+			local_timer += delta
+			velocity.x = sign(player_target.x - global_position.x) * speed
+			if local_timer > 3:
+				state = 7
+			pass
+		6:
+			local_timer += delta
+			if local_timer > 5:
+				state = 7
+				$BulletTimer.wait_time = 1
+		7:
 			$BulletTimer.paused = true
 			$PhaseTimer.stop()
-			direction = (bush_loc - global_position)
-			if (direction.length() < 1):
-				state = 5
-			print(direction.length())
-			velocity = direction.normalized() * 200
-			move_and_slide(velocity)
-		5:
+			var directionx = (bush_loc.x - global_position.x)
+			if (abs(directionx) < 3):
+				direction = (bush_loc - global_position).normalized()
+				direction.y *= jump_force
+				velocity = direction
+			else:
+				direction.x = sign(directionx)
+				direction.y = 0
+				velocity = direction * speed
+			if ((bush_loc - global_position).length() < 10):
+				state = 8
+		8:
 			get_parent().attack_over()
 			velocity = Vector2.ZERO
 			state = 0
@@ -53,14 +82,15 @@ func _process(delta):
 			pass
 
 func set_state(state_change):
-	print_debug(state)
 	state = state_change
 	
 
 func handle_damage(damage):
 	health -= damage
 	print_debug(health)
+	get_parent().get_node("CanvasLayer/ProgressBar").value = health
 	if (health < 0):
+		get_parent().rabbit_death()
 		queue_free()
 
 

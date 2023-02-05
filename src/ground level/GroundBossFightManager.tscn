@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://GroundBossFightManager.gd" type="Script" id=1]
+[ext_resource path="res://src/ground level/GroundBossFightManager.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://src/ground level/GroundRabbit.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 545.565, 370.947 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 219, 10 )
 
 [node name="GroundBossFightManager" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,7 +51,35 @@ position = Vector2( 3.17468, -1225.47 )
 
 [node name="BetweenPhaseTimer" type="Timer" parent="."]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_left = 0.35
+anchor_top = 0.9
+anchor_right = 0.65
+anchor_bottom = 0.95
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 665, 239 )
+rotation = -1.5708
+scale = Vector2( 0.796273, 3.54413 )
+collision_layer = 32768
+collision_mask = 32768
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+visible = false
+scale = Vector2( 6.87921, 0.319999 )
+texture = ExtResource( 2 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="BossTimer" to="." method="_on_BossTimer_timeout"]
 [connection signal="timeout" from="BossTimer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="BetweenPhaseTimer" to="." method="_on_BetweenPhaseTimer_timeout"]
 [connection signal="timeout" from="BetweenPhaseTimer" to="GroundRabbit" method="_on_Timer_timeout"]

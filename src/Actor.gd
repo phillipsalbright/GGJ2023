@@ -10,6 +10,7 @@ export(int) var speed = 300
 export(int) var jump_force = 600
 export(int) var acceleration = 1500
 export(int) var health = 50
+export(int) var max_health = 50
 
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
