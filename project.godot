@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BreakableWall.gd"
 }, {
+"base": "Node2D",
+"class": "GroundBossFightManager",
+"language": "GDScript",
+"path": "res://GroundBossFightManager.gd"
+}, {
 "base": "Actor",
 "class": "GroundPlayer",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Actor": "",
 "BreakablePlatform": "",
 "BreakableWall": "",
+"GroundBossFightManager": "",
 "GroundPlayer": "",
 "GroundRabbit": ""
 }
