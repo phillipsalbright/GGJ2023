@@ -1,3 +1,96 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/MainMenu.gd" type="Script" id=1]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayGame" type="Button" parent="CanvasLayer"]
+anchor_left = 0.42
+anchor_top = 0.58
+anchor_right = 0.6
+anchor_bottom = 0.64
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Play Game"
+align = 1
+valign = 1
+
+[node name="Quit" type="Button" parent="CanvasLayer"]
+anchor_left = 0.42
+anchor_top = 0.68
+anchor_right = 0.6
+anchor_bottom = 0.74
+
+[node name="Label" type="Label" parent="CanvasLayer/Quit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Quit"
+align = 1
+valign = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Water Level" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.22
+anchor_top = 0.38
+anchor_right = 0.4
+anchor_bottom = 0.44
+
+[node name="Label" type="Label" parent="CanvasLayer2/Water Level"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Water Level"
+align = 1
+valign = 1
+
+[node name="Ground Level" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.6
+anchor_top = 0.38
+anchor_right = 0.78
+anchor_bottom = 0.44
+
+[node name="Label" type="Label" parent="CanvasLayer2/Ground Level"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Ground Level"
+align = 1
+valign = 1
+
+[node name="Air Level" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.42
+anchor_top = 0.58
+anchor_right = 0.6
+anchor_bottom = 0.64
+
+[node name="Label" type="Label" parent="CanvasLayer2/Air Level"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Air Level"
+align = 1
+valign = 1
+
+[node name="Back" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.12
+anchor_top = 0.7
+anchor_right = 0.3
+anchor_bottom = 0.76
+
+[node name="Label" type="Label" parent="CanvasLayer2/Back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Back	"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="CanvasLayer/PlayGame" to="." method="_on_PlayGame_pressed"]
+[connection signal="pressed" from="CanvasLayer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Water Level" to="." method="_on_Water_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Ground Level" to="." method="_on_Ground_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Air Level" to="." method="_on_Air_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Back" to="." method="_on_Back_pressed"]

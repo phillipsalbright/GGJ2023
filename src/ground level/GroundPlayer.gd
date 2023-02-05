@@ -7,14 +7,15 @@ class_name GroundPlayer
 var fall_acceleration = -210
 var roll_time = 0
 var roll_damage_scale = .8
-var roll_launch_scale = 520
-var max_charge_time = 1.6
+var roll_launch_scale = 570
+var max_charge_time = 1.8
 var launching_time = 1
 var current_launch_timer = 0
 var last_direction = -1
 export(float) var damage_scalar = 20.0
 var damage_to_deal = 0
 var hurt_time = 0
+var cooldownTimer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +35,7 @@ func _process(delta):
 		hurt_time -= delta
 		if hurt_time <= 0:
 			$AnimationPlayer2.play("RESET")
-	
+	cooldownTimer -= delta
 	if current_launch_timer > 0:
 		current_launch_timer -= delta
 		
@@ -46,7 +47,7 @@ func _process(delta):
 			elif is_on_floor():
 				$AnimationPlayer.play("Idle")
 		velocity.x = (direction.x) * speed
-		if Input.is_action_pressed("special") and roll_time < max_charge_time:
+		if Input.is_action_pressed("special") and roll_time < max_charge_time and cooldownTimer <= 0:
 			velocity.x = direction.x * speed * .1;
 			roll_time += delta
 			$AnimationPlayer.play("Charging")
@@ -54,9 +55,10 @@ func _process(delta):
 			velocity.x = (roll_time + .2) * roll_launch_scale * last_direction
 			velocity.y = roll_time * roll_launch_scale * -.1
 			$AnimationPlayer.play("Running")
-			current_launch_timer = roll_time * 1.1 + .2
+			current_launch_timer = roll_time + .2
 			get_node("Area2D").monitoring = true
 			damage_to_deal = roll_time * damage_scalar
+			cooldownTimer = current_launch_timer + .5
 			roll_time = 0
 #	pass
 
@@ -83,10 +85,11 @@ func get_input_direction():
 		velocity.y = -jump_force
 		$AnimationPlayer.play("Jump")
 		snap_vector = Vector2.ZERO
-	if direction.x > 0:
-		sprite.flip_h = false
-	elif direction.x < 0:
-		sprite.flip_h = true
+	if current_launch_timer <= 0:
+		if direction.x > 0:
+			sprite.flip_h = false
+		elif direction.x < 0:
+			sprite.flip_h = true
 	
 	short_hop()
 

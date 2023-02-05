@@ -17,5 +17,5 @@ func _ready():
 #	pass
 
 func handle_damage(damage):
-	if (damage > 20):
+	if (damage > 15):
 		queue_free();

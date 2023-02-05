@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 
 # Declare member variables here. Examples:
@@ -16,10 +16,6 @@ func _ready():
 #	pass
 
 
-func _on_SlowDownFire_body_entered(body):
-	$Rabbit.timer.start(2)
-	call_deferred("disable_slowdown")
-
-
-func disable_slowdown():
-	$SlowDownFire/CollisionShape2D.disabled = true
+func _on_Area2D_body_entered(body):
+	body.handle_damage(body.health)
+	pass # Replace with function body.
