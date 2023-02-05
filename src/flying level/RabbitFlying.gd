@@ -36,6 +36,10 @@ func _physics_process(delta):
 		move_and_slide(velocity)
 
 
+func slow_down_timer():
+	timer.start(2)
+
+
 func _on_ShootCountdown_timeout():
 	if active:
 		var bullet = BULLET.instance()
