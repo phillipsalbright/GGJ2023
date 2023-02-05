@@ -8,6 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$CanvasLayer/PlayGame.grab_focus()
 	pass # Replace with function body.
 
 
@@ -19,6 +20,7 @@ func _ready():
 func _on_PlayGame_pressed():
 	$CanvasLayer.visible = false
 	$CanvasLayer2.visible = true
+	$CanvasLayer2/GroundLevel.grab_focus()
 	pass # Replace with function body.
 
 
@@ -45,4 +47,5 @@ func _on_Air_Level_pressed():
 func _on_Back_pressed():
 	$CanvasLayer.visible = true
 	$CanvasLayer2.visible = false
+	$CanvasLayer/PlayGame.grab_focus()
 	pass # Replace with function body.

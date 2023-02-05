@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/water level/WaterLevel.gd" type="Script" id=1]
 [ext_resource path="res://src/water level/WaterPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/water level/WaterRabbit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Water Level Background.png" type="Texture" id=4]
 [ext_resource path="res://src/water level/WaterLevelUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/ground level/WinScreenGround.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 322, 16 )
@@ -46,7 +47,7 @@ shape = SubResource( 2 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 59, 215 )
+position = Vector2( 60, 214 )
 
 [node name="Rabbit" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 597, 209 )
@@ -60,6 +61,9 @@ wait_time = 40.0
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource( 5 )]
+
+[node name="WinScreen" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [connection signal="timeout" from="LogSpawner" to="." method="_on_LogSpawner_timeout"]
 [connection signal="timeout" from="LogIncrease" to="." method="_on_LogIncrease_timeout"]

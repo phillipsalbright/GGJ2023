@@ -21,6 +21,7 @@ func _process(delta):
 		if paused:
 			visible = false
 			root.paused = false
+			$Button.set_focus()
 		else:
 			visible = true
 			root.paused = true
