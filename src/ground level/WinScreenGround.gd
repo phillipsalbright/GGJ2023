@@ -16,6 +16,7 @@ func _ready():
 func player_wins():
 	visible = true
 	root.paused = true
+	$Button2.grab_focus()
 
 
 func _on_Button2_pressed():

@@ -1,6 +1,53 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/Stage Select Backdrop.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI Stuff/Water Level Button (unselected).png" type="Texture" id=3]
+[ext_resource path="res://assets/UI Stuff/Water Level Button (selected).png" type="Texture" id=4]
+[ext_resource path="res://assets/UI Stuff/Ground Level Button (selected).png" type="Texture" id=5]
+[ext_resource path="res://assets/UI Stuff/Ground Level Button (unselected).png" type="Texture" id=6]
+[ext_resource path="res://assets/UI Stuff/Flying Level Button (selected).png" type="Texture" id=7]
+[ext_resource path="res://assets/UI Stuff/Flying Level Button (unselected).png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 56, 38 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 56, 38 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 56, 38 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 56, 38 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 43, 64 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 43, 64 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 43, 64 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 54, 50 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 54, 50 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 54, 50 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,6 +59,7 @@ anchor_left = 0.42
 anchor_top = 0.58
 anchor_right = 0.6
 anchor_bottom = 0.64
+focus_neighbour_bottom = NodePath("../Quit")
 
 [node name="Label" type="Label" parent="CanvasLayer/PlayGame"]
 anchor_right = 1.0
@@ -25,6 +73,7 @@ anchor_left = 0.42
 anchor_top = 0.68
 anchor_right = 0.6
 anchor_bottom = 0.74
+focus_neighbour_top = NodePath("../PlayGame")
 
 [node name="Label" type="Label" parent="CanvasLayer/Quit"]
 anchor_right = 1.0
@@ -36,50 +85,66 @@ valign = 1
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Water Level" type="Button" parent="CanvasLayer2"]
-anchor_left = 0.22
-anchor_top = 0.38
-anchor_right = 0.4
-anchor_bottom = 0.44
+[node name="WaterLevel" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.421
+anchor_top = 0.842
+anchor_right = 0.521
+anchor_bottom = 0.942
+margin_left = 0.119934
+margin_top = -0.240051
+margin_right = 0.119995
+margin_bottom = -0.240051
+focus_neighbour_left = NodePath("../GroundLevel")
+focus_neighbour_right = NodePath("../AirLevel")
+focus_neighbour_bottom = NodePath("../Back")
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/normal = SubResource( 2 )
 
-[node name="Label" type="Label" parent="CanvasLayer2/Water Level"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "Water Level"
-align = 1
-valign = 1
+[node name="GroundLevel" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.289
+anchor_top = 0.693
+anchor_right = 0.356
+anchor_bottom = 0.864
+margin_left = 0.0799866
+margin_top = 0.039978
+margin_right = 0.320007
+margin_bottom = -0.0800171
+focus_neighbour_right = NodePath("../WaterLevel")
+focus_neighbour_bottom = NodePath("../Back")
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 6 )
 
-[node name="Ground Level" type="Button" parent="CanvasLayer2"]
-anchor_left = 0.6
-anchor_top = 0.38
-anchor_right = 0.78
-anchor_bottom = 0.44
-
-[node name="Label" type="Label" parent="CanvasLayer2/Ground Level"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "Ground Level"
-align = 1
-valign = 1
-
-[node name="Air Level" type="Button" parent="CanvasLayer2"]
-anchor_left = 0.42
-anchor_top = 0.58
+[node name="AirLevel" type="Button" parent="CanvasLayer2"]
+anchor_left = 0.516
+anchor_top = 0.69
 anchor_right = 0.6
-anchor_bottom = 0.64
-
-[node name="Label" type="Label" parent="CanvasLayer2/Air Level"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "Air Level"
-align = 1
-valign = 1
+anchor_bottom = 0.843
+margin_left = 0.519958
+margin_top = 0.199951
+margin_right = 4.0
+margin_bottom = 0.039978
+focus_neighbour_left = NodePath("../WaterLevel")
+focus_neighbour_bottom = NodePath("../Back")
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 9 )
 
 [node name="Back" type="Button" parent="CanvasLayer2"]
-anchor_left = 0.12
-anchor_top = 0.7
-anchor_right = 0.3
-anchor_bottom = 0.76
+anchor_left = 0.032
+anchor_top = 0.885
+anchor_right = 0.212
+anchor_bottom = 0.945
+margin_left = 0.0399971
+margin_top = -0.200012
+margin_right = 0.0400085
+margin_bottom = -0.200012
+focus_neighbour_top = NodePath("../GroundLevel")
+focus_neighbour_right = NodePath("../GroundLevel")
 
 [node name="Label" type="Label" parent="CanvasLayer2/Back"]
 anchor_right = 1.0
@@ -88,9 +153,18 @@ text = "Back	"
 align = 1
 valign = 1
 
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+layer = -4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+stretch_mode = 1
+
 [connection signal="pressed" from="CanvasLayer/PlayGame" to="." method="_on_PlayGame_pressed"]
 [connection signal="pressed" from="CanvasLayer/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="pressed" from="CanvasLayer2/Water Level" to="." method="_on_Water_Level_pressed"]
-[connection signal="pressed" from="CanvasLayer2/Ground Level" to="." method="_on_Ground_Level_pressed"]
-[connection signal="pressed" from="CanvasLayer2/Air Level" to="." method="_on_Air_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/WaterLevel" to="." method="_on_Water_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/GroundLevel" to="." method="_on_Ground_Level_pressed"]
+[connection signal="pressed" from="CanvasLayer2/AirLevel" to="." method="_on_Air_Level_pressed"]
 [connection signal="pressed" from="CanvasLayer2/Back" to="." method="_on_Back_pressed"]
