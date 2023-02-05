@@ -1,9 +1,6 @@
 extends KinematicBody2D
 
 
-var lane = 2
-var lane_positions = [145, 215, 275]
-
 # Variables to simulate sprite jumping
 var jumping = false
 var storey = 0

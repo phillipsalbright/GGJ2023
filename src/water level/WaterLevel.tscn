@@ -47,11 +47,11 @@ shape = SubResource( 2 )
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 59, 215 )
 
+[node name="Rabbit" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 590, 210 )
+
 [node name="LogSpawner" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="Rabbit" parent="." instance=ExtResource( 3 )]
-position = Vector2( 590, 199 )
 
 [connection signal="timeout" from="LogSpawner" to="." method="_on_LogSpawner_timeout"]
