@@ -27,5 +27,6 @@ func _on_Button_pressed():
 
 
 func _on_Button2_pressed():
+	root.paused = false
 	get_tree().change_scene("res://src/Main.tscn")
 	pass # Replace with function body.
