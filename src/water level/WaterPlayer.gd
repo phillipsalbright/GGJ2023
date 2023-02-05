@@ -8,6 +8,7 @@ var storey = 0
 var spritev = 0
 
 var health = 100
+var max_health = 100
 
 export(int) var speed = 150
 export(int) var jump_force = 250
@@ -19,6 +20,8 @@ var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$HealthBar/TextureProgress.max_value = max_health
+	$HealthBar/TextureProgress.value = health
 	pass # Replace with function body.
 
 
@@ -35,6 +38,7 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("jump"):
 			$AnimationPlayer.play("jump")
+			$JumpSound.play()
 			jumping = true
 			spritev = -jump_force
 			storey = $Sprite.position.y
@@ -56,3 +60,8 @@ func _physics_process(delta):
 
 func handle_damage(damage):
 	health -= damage
+	$HealthBar/TextureProgress.value = health
+	if (health <= 0):
+		$DeathMenu.player_died()
+	
+	$HurtSound.play()

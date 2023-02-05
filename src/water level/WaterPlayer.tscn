@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/Player Swim.png" type="Texture" id=1]
 [ext_resource path="res://src/water level/WaterPlayer.gd" type="Script" id=2]
 [ext_resource path="res://assets/Water Level Player Shadow.png" type="Texture" id=3]
+[ext_resource path="res://src/DeathMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (empty).png" type="Texture" id=5]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (full).png" type="Texture" id=6]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (decor).png" type="Texture" id=7]
+[ext_resource path="res://assets/sfx/Hit_Hurt_Player.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sfx/Jump.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14.5, 9.5 )
@@ -250,3 +256,25 @@ anims/RESET = SubResource( 2 )
 anims/dive = SubResource( 5 )
 anims/jump = SubResource( 3 )
 anims/swim = SubResource( 1 )
+
+[node name="DeathMenu" parent="." instance=ExtResource( 4 )]
+
+[node name="HealthBar" type="CanvasLayer" parent="."]
+
+[node name="TextureProgress" type="TextureProgress" parent="HealthBar"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.31
+anchor_bottom = 0.151
+rect_scale = Vector2( 3, 3 )
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 7 )
+texture_progress = ExtResource( 6 )
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -17.0

@@ -10,13 +10,12 @@ const BULLET = preload("res://src/Bullet.tscn")
 onready var player = get_parent().get_parent().get_node("Player")
 var bush_loc
 var local_timer = 0
+var reset_timer = 0
 var player_target = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_health = 20
-	health = 20
 	pass # Replace with function body.
 
 
@@ -34,6 +33,7 @@ func _process(delta):
 			state = 2
 			pass
 		2:
+			$AnimationPlayer.play("Shooting")
 			$PhaseTimer.start(5)
 			$BulletTimer.paused = false
 			$BulletTimer.start()
@@ -52,19 +52,24 @@ func _process(delta):
 				state = 6
 		5:
 			$BulletTimer.stop()
+			$AnimationPlayer.play("standing")
 			local_timer += delta
 			velocity.x = player_target * speed
 			$Area2D.monitoring = true
 			if local_timer > 2.9:
 				velocity = Vector2.ZERO
 				state = 7
+				reset_timer = 0
 			pass
 		6:
 			local_timer += delta
 			if local_timer > 5:
 				state = 7
+				reset_timer = 0
 				$BulletTimer.wait_time = 1
 		7:
+			$AnimationPlayer.play("standing")
+			reset_timer += delta
 			$BulletTimer.paused = true
 			$PhaseTimer.stop()
 			var directionx = (bush_loc.x - global_position.x)
@@ -80,12 +85,18 @@ func _process(delta):
 				velocity = Vector2.ZERO
 				$Area2D.monitoring = false
 				state = 8
+			if (reset_timer > 5):
+				state = 8
 		8:
 			get_parent().attack_over()
 			velocity = Vector2.ZERO
 			state = 0
 		_:
 			pass
+	if direction.x > 0:
+		$Sprite.flip_h = false
+	elif direction.x < 0:
+		$Sprite.flip_h = true
 
 func set_state(state_change):
 	state = state_change
@@ -93,17 +104,19 @@ func set_state(state_change):
 
 func handle_damage(damage):
 	health -= damage
-	print_debug(health)
-	get_parent().get_node("CanvasLayer/ProgressBar").value = health
+	get_parent().get_node("CanvasLayer/TextureProgress").value = health
+	$HurtSound.play()
 	if (health < 0):
 		get_parent().rabbit_death()
 		queue_free()
+	
 
 
 func _on_BulletTimer_timeout():
 	var bullet = BULLET.instance()
 	get_parent().add_child(bullet)
 	bullet.direction = (player.global_position - global_position).normalized()
+	direction.x = sign(bullet.direction.x)
 	bullet.global_position = global_position
 	pass # Replace with function body.
 

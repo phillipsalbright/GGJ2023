@@ -14,9 +14,9 @@ func _ready():
 	bush_locs= [$Bush.global_position, $Bush2.global_position, $Bush3.global_position]
 	$GroundRabbit.global_position = $RabbitStorageLoc.global_position
 	$GroundRabbit.set_state(0)
-	$CanvasLayer/ProgressBar.visible = false
-	$CanvasLayer/ProgressBar.max_value = $GroundRabbit.max_health
-	$CanvasLayer/ProgressBar.value = $GroundRabbit.health
+	$CanvasLayer/TextureProgress.visible = false
+	$CanvasLayer/TextureProgress.max_value = $GroundRabbit.max_health
+	$CanvasLayer/TextureProgress.value = $GroundRabbit.health
 	pass # Replace with function body.
 
 
@@ -36,7 +36,7 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	if body is GroundPlayer:
 		move_camera = true
-		$CanvasLayer/ProgressBar.visible = true
+		$CanvasLayer/TextureProgress.visible = true
 		$Camera2D.global_position =  get_parent().get_node("Player/Camera2D").global_position
 		player_camera = get_parent().get_node("Player/Camera2D")
 		$Camera2D.current = true
@@ -67,7 +67,7 @@ func _on_BossTimer_timeout():
 	pass # Replace with function body.
 	
 func rabbit_death():
-	$CanvasLayer/ProgressBar.visible = false
+	$CanvasLayer/TextureProgress.visible = false
 	boss_defeated = true
 	$StaticBody2D4.queue_free()
 	pass
