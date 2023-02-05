@@ -13,5 +13,4 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	get_tree().paused = true
-	get_parent().get_node("WinScreen").visible = true
-	get_parent().get_node("WinScreen").get_node("Button2")
+	get_parent().get_node("WinScreen").player_wins()
