@@ -7,12 +7,12 @@ class_name GroundPlayer
 var fall_acceleration = -210
 var roll_time = 0
 var roll_damage_scale = .8
-var roll_launch_scale = 570
+var roll_launch_scale = 550
 var max_charge_time = 1.8
 var launching_time = 1
 var current_launch_timer = 0
 var last_direction = -1
-export(float) var damage_scalar = 20.0
+export(float) var damage_scalar = 18.0
 var damage_to_deal = 0
 var hurt_time = 0
 var cooldownTimer = 0
@@ -52,13 +52,13 @@ func _process(delta):
 			roll_time += delta
 			$AnimationPlayer.play("Charging")
 		elif roll_time > 0:
-			velocity.x = (roll_time + .2) * roll_launch_scale * last_direction
+			velocity.x = (roll_time + .12) * roll_launch_scale * last_direction + 75
 			velocity.y = roll_time * roll_launch_scale * -.1
 			$AnimationPlayer.play("Running")
-			current_launch_timer = roll_time + .2
+			current_launch_timer = roll_time * .7 + .3
 			get_node("Area2D").monitoring = true
-			damage_to_deal = roll_time * damage_scalar
-			cooldownTimer = current_launch_timer + .5
+			damage_to_deal = roll_time * damage_scalar + 2
+			cooldownTimer = current_launch_timer + .4
 			roll_time = 0
 #	pass
 
@@ -105,7 +105,7 @@ func _on_Area2D_body_entered(body):
 	pass # Replace with function body.
 	
 func handle_damage(damage):
-	if (hurt_time <= 0):
+	if (hurt_time <= 0 and current_launch_timer <= .2):
 		health -= damage
 		$AnimationPlayer2.play("Hurt")
 		hurt_time = 2
@@ -113,3 +113,8 @@ func handle_damage(damage):
 			$DeathScreen.player_died()
 	$HealthBar/ProgressBar.value = health
 	
+
+
+func _on_Win_detection_area_entered(area):
+	$WinScreen.player_wins()
+	pass # Replace with function body.

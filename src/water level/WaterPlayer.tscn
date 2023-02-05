@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/Player Swim.png" type="Texture" id=1]
 [ext_resource path="res://src/water level/WaterPlayer.gd" type="Script" id=2]
 [ext_resource path="res://assets/Water Level Player Shadow.png" type="Texture" id=3]
+[ext_resource path="res://src/DeathMenu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14.5, 9.5 )
@@ -250,3 +251,5 @@ anims/RESET = SubResource( 2 )
 anims/dive = SubResource( 5 )
 anims/jump = SubResource( 3 )
 anims/swim = SubResource( 1 )
+
+[node name="DeathMenu" parent="." instance=ExtResource( 4 )]

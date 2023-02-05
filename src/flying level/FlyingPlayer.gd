@@ -92,3 +92,9 @@ func end_jump_takeoff():
 
 func _on_AirBoostDuration_timeout():
 	hover = true
+
+
+func handle_damage(damage):
+	health -= damage
+	if health <= 0:
+		$DeathMenu.player_died()

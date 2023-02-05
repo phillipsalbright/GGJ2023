@@ -56,3 +56,5 @@ func _physics_process(delta):
 
 func handle_damage(damage):
 	health -= damage
+	if (health <= 0):
+		$DeathMenu.player_died()

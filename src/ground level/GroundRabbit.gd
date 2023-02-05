@@ -10,13 +10,12 @@ const BULLET = preload("res://src/Bullet.tscn")
 onready var player = get_parent().get_parent().get_node("Player")
 var bush_loc
 var local_timer = 0
+var reset_timer = 0
 var player_target = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	max_health = 20
-	health = 20
 	pass # Replace with function body.
 
 
@@ -58,13 +57,16 @@ func _process(delta):
 			if local_timer > 2.9:
 				velocity = Vector2.ZERO
 				state = 7
+				reset_timer = 0
 			pass
 		6:
 			local_timer += delta
 			if local_timer > 5:
 				state = 7
+				reset_timer = 0
 				$BulletTimer.wait_time = 1
 		7:
+			reset_timer += delta
 			$BulletTimer.paused = true
 			$PhaseTimer.stop()
 			var directionx = (bush_loc.x - global_position.x)
@@ -79,6 +81,8 @@ func _process(delta):
 			if ((bush_loc - global_position).length() < 10):
 				velocity = Vector2.ZERO
 				$Area2D.monitoring = false
+				state = 8
+			if (reset_timer > 5):
 				state = 8
 		8:
 			get_parent().attack_over()
