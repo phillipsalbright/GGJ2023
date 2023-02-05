@@ -1,6 +1,7 @@
 extends StaticBody2D
 class_name BreakableWall
 
+const BREAKSOUND = preload("res://src/BreakSound.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -17,5 +18,7 @@ func _ready():
 #	pass
 
 func handle_damage(damage):
-	if (damage > 15):
+	var sound = BREAKSOUND.instance()
+	get_parent().add_child(sound)
+	if (damage > 16):
 		queue_free();

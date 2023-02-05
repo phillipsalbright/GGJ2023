@@ -12,7 +12,8 @@ export(int) var hover_friction = 1500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$HealthBar/TextureProgress.max_value = max_health
+	$HealthBar/TextureProgress.value = health
 
 
 func _physics_process(delta):
@@ -75,6 +76,7 @@ func get_input_direction():
 		snap_vector = Vector2.ZERO
 		jump_takeoff = true
 		$AnimationPlayer.play("take off")
+		$JumpSound.play()
 	
 	short_hop()
 
@@ -92,3 +94,15 @@ func end_jump_takeoff():
 
 func _on_AirBoostDuration_timeout():
 	hover = true
+
+
+func handle_damage(damage):
+	health -= damage
+	$HurtSound.play()
+	$HealthBar/TextureProgress.value = health
+	if health <= 0:
+		$DeathMenu.player_died()
+
+
+func _on_Win_detection_area_entered(area):
+	$WinScreen.player_wins()

@@ -1,17 +1,41 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/water level/WaterLevelUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/Water Level Progress Bar.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 482, 43 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 482, 0, 482, 43 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 964, 0, 482, 43 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 1446, 0, 482, 43 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 1928, 0, 482, 43 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.08
+} ]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="HPLabel" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 4, 4 )
-text = "HP: 50"
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -835.0
@@ -34,5 +58,10 @@ margin_right = -341.0
 margin_bottom = -23.0
 rect_scale = Vector2( 5, 5 )
 text = "i guess u are a winner or something"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 904, 47 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 6 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

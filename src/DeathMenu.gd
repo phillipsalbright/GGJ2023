@@ -17,6 +17,7 @@ func _ready():
 func player_died():
 	visible = true
 	root.paused = true
+	$Button.grab_focus()
 
 
 func _on_Button_pressed():
@@ -26,5 +27,6 @@ func _on_Button_pressed():
 
 
 func _on_Button2_pressed():
+	root.paused = false
 	get_tree().change_scene("res://src/Main.tscn")
 	pass # Replace with function body.

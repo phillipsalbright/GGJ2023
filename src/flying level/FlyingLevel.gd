@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_SlowDownFire_body_entered(body):
-	$Rabbit.timer.start(2)
+	$Rabbit.slow_down_timer()
 	call_deferred("disable_slowdown")
 
 
