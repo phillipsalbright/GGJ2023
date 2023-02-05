@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 const gravity = 1500.0
 const snap_distance = 10
-const terminal_velocity = 700
+const terminal_velocity = 500
 
 export(bool) var is_player = true
 export(int) var speed = 300
@@ -56,6 +56,7 @@ func short_hop():
 func handle_movement(delta):
 	velocity.x = move_toward(velocity.x, direction.x * speed, delta * acceleration)
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector2.UP, true, 4, 0.8)
-	
+
+
 func handle_damage(damage):
 	health -= damage

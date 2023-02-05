@@ -2,8 +2,9 @@ extends Actor
 
 var air_boost = true
 var hover = false
+var jump_takeoff = false
 
-export(int) var air_boost_acceleration = 2500
+export(int) var air_boost_acceleration = 2000
 export(int) var air_boost_speed = 500
 export(int) var hover_speed = 200
 export(int) var hover_fall_speed = 600
@@ -25,15 +26,21 @@ func _physics_process(delta):
 	
 	if $AirBoostDuration.time_left > 0:
 		velocity.y = move_toward(velocity.y, -air_boost_speed, air_boost_acceleration * delta)
-		sprite.modulate = Color(0.8, 1, 0.8, 1)
+		$AnimationPlayer.play("float")
 	elif hover:
-		sprite.modulate = Color(1, 0.8, 0.8, 1)
 		if Input.is_action_pressed("move_down"):
 			velocity.y = move_toward(velocity.y, hover_fall_speed, hover_friction * delta)
+			$AnimationPlayer.play("idle")
 		else:
 			velocity.y = move_toward(velocity.y, hover_speed, hover_friction * delta)
+			$AnimationPlayer.play("jump")
 	else:
-		sprite.modulate = Color.white
+		if jump_takeoff:
+			$AnimationPlayer.play("take off")
+		elif direction.x != 0:
+			$AnimationPlayer.play("walk")
+		else:
+			$AnimationPlayer.play("idle")
 	
 	
 	for i in get_slide_count():
@@ -53,11 +60,33 @@ func apply_gravity(delta):
 	if $AirBoostDuration.time_left != 0:
 		snap_vector = Vector2.ZERO
 
+# overriding parent get input direction
+func get_input_direction():
+	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	
+	if direction.x > 0:
+		sprite.flip_h = false
+	elif direction.x < 0:
+		sprite.flip_h = true
+	
+	if Input.is_action_just_pressed("jump") && is_on_floor():
+		velocity.y = -jump_force
+		snap_vector = Vector2.ZERO
+		jump_takeoff = true
+		$AnimationPlayer.play("take off")
+	
+	short_hop()
+
 
 # Overriding parent short_hop
 func short_hop():
 	if Input.is_action_just_released("jump") && velocity.y < 0 && $AirBoostDuration.time_left == 0:
 		velocity.y *= 0.6
+
+
+func end_jump_takeoff():
+	jump_takeoff = false
+	hover = true
 
 
 func _on_AirBoostDuration_timeout():

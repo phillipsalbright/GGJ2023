@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GGJ2023"
-run/main_scene="res://src/water level/WaterLevel.tscn"
+run/main_scene="res://src/flying level/FlyingLevel.tscn"
 config/icon="res://icon.png"
 
 [display]

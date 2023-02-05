@@ -3,7 +3,7 @@ extends Area2D
 var direction = Vector2.ZERO
 var max_velocity = Vector2.ZERO
 
-export(int) var wind_speed = 700
+export(int) var wind_speed = 500
 export(int) var wind_acceleration = 2500
 
 func _ready():
