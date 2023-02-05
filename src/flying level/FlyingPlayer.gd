@@ -100,3 +100,7 @@ func handle_damage(damage):
 	$HealthBar/TextureProgress.value = health
 	if health <= 0:
 		$DeathMenu.player_died()
+
+
+func _on_Win_detection_area_entered(area):
+	$WinScreen.player_wins()

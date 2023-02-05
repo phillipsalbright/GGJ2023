@@ -20,6 +20,7 @@ func _ready():
 
 
 func _physics_process(delta):
+	$Sprite.look_at(player.global_position)
 	if follow_player:
 		var dist = global_position.distance_to(player.global_position)
 		var dir = (player.global_position - global_position).normalized()
