@@ -59,7 +59,7 @@ _global_script_class_icons={
 config/name="Adaptations"
 config/description="Global game jam 2023"
 run/main_scene="res://src/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/Game Icon.png"
 
 [display]
 
