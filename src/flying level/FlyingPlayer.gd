@@ -37,7 +37,7 @@ func _physics_process(delta):
 	else:
 		if jump_takeoff:
 			$AnimationPlayer.play("take off")
-		elif direction.x != 0:
+		elif direction.x != 0 && is_on_floor():
 			$AnimationPlayer.play("walk")
 		else:
 			$AnimationPlayer.play("idle")
@@ -59,6 +59,7 @@ func apply_gravity(delta):
 	
 	if $AirBoostDuration.time_left != 0:
 		snap_vector = Vector2.ZERO
+
 
 # overriding parent get input direction
 func get_input_direction():

@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "GroundRabbit",
 "language": "GDScript",
 "path": "res://src/ground level/GroundRabbit.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "WaterPlayer",
+"language": "GDScript",
+"path": "res://src/water level/WaterPlayer.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "BreakableWall": "",
 "GroundBossFightManager": "",
 "GroundPlayer": "",
-"GroundRabbit": ""
+"GroundRabbit": "",
+"WaterPlayer": ""
 }
 
 [application]

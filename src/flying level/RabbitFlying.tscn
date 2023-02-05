@@ -19,7 +19,6 @@ modulate = Color( 0.172549, 0.47451, 0.898039, 1 )
 texture = ExtResource( 1 )
 
 [node name="ShootCountdown" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+wait_time = 0.5
 
 [connection signal="timeout" from="ShootCountdown" to="." method="_on_ShootCountdown_timeout"]

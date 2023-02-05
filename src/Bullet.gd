@@ -29,6 +29,5 @@ func _on_Bullet_body_entered(body):
 # only for water player hurtbox
 func _on_Bullet_area_entered(area):
 	var player = area.get_parent().get_parent()
-	if player is Actor:
-		player.handle_damage(damage)
+	player.handle_damage(damage)
 	queue_free()
