@@ -19,5 +19,6 @@ func player_wins():
 
 
 func _on_Button2_pressed():
+	get_tree().paused = false
 	get_tree().change_scene("res://src/Main.tscn")
 	pass # Replace with function body.

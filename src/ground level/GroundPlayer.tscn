@@ -1,9 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/Player Ground.png" type="Texture" id=1]
 [ext_resource path="res://src/ground level/GroundPlayer.gd" type="Script" id=2]
 [ext_resource path="res://src/DeathMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/ground level/WinScreenGround.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (empty).png" type="Texture" id=5]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (full).png" type="Texture" id=6]
+[ext_resource path="res://assets/UI Stuff/Player Health Bar (decor).png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21, 29.5 )
@@ -144,12 +147,6 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="SpatialMaterial" id=11]
-albedo_color = Color( 0, 1, 0.0431373, 1 )
-
-[sub_resource type="CanvasItemMaterial" id=12]
-next_pass = SubResource( 11 )
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1, -140 )
 collision_layer = 49155
@@ -204,14 +201,15 @@ anims/RESET = SubResource( 10 )
 
 [node name="HealthBar" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="ProgressBar" parent="HealthBar"]
-modulate = Color( 0, 1, 0.203922, 1 )
-self_modulate = Color( 0, 1, 0.0862745, 1 )
-material = SubResource( 12 )
+[node name="TextureProgress" type="TextureProgress" parent="HealthBar"]
 anchor_left = 0.05
 anchor_top = 0.05
-anchor_right = 0.4
-anchor_bottom = 0.1
+anchor_right = 0.31
+anchor_bottom = 0.151
+rect_scale = Vector2( 3, 3 )
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 7 )
+texture_progress = ExtResource( 6 )
 
 [node name="WinScreen" parent="." instance=ExtResource( 4 )]
 

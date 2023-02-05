@@ -12,7 +12,8 @@ export(int) var hover_friction = 1500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$HealthBar/TextureProgress.max_value = max_health
+	$HealthBar/TextureProgress.value = health
 
 
 func _physics_process(delta):
@@ -96,5 +97,6 @@ func _on_AirBoostDuration_timeout():
 
 func handle_damage(damage):
 	health -= damage
+	$HealthBar/TextureProgress.value = health
 	if health <= 0:
 		$DeathMenu.player_died()
