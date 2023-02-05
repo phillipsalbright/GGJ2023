@@ -1,3 +1,4 @@
+class_name WaterPlayer
 extends KinematicBody2D
 
 
@@ -5,6 +6,8 @@ extends KinematicBody2D
 var jumping = false
 var storey = 0
 var spritev = 0
+
+var health = 100
 
 export(int) var speed = 150
 export(int) var jump_force = 250
@@ -41,9 +44,6 @@ func _physics_process(delta):
 		$AnimationPlayer.play("swim")
 		$Sprite.position.y = storey
 	
-	if $AnimationPlayer.current_animation == "dive":
-		direction = Vector2.ZERO
-	
 	if !jumping:
 		velocity = direction.normalized() * speed
 	else:
@@ -52,3 +52,7 @@ func _physics_process(delta):
 		#velocity.y += gravity * delta
 	
 	move_and_slide(velocity)
+
+
+func handle_damage(damage):
+	health -= damage

@@ -23,5 +23,10 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
+[node name="AttackPatternTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
 [connection signal="timeout" from="ShootCountdown" to="." method="_on_ShootCountdown_timeout"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="timeout" from="AttackPatternTimer" to="." method="_on_AttackPatternTimer_timeout"]
