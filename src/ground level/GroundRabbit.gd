@@ -43,16 +43,20 @@ func _process(delta):
 		4:
 			var ydist = abs(global_position.y - player.global_position.y)
 			local_timer = 0
-			if ydist < 1:
+			print_debug(ydist)
+			if ydist < 50:
 				state = 5
-				player_target = player.global_position
+				player_target = sign(player.global_position.x - global_position.x)
 			else:
 				$BulletTimer.wait_time = .4
 				state = 6
 		5:
+			$BulletTimer.stop()
 			local_timer += delta
-			velocity.x = sign(player_target.x - global_position.x) * speed
-			if local_timer > 3:
+			velocity.x = player_target * speed
+			$Area2D.monitoring = true
+			if local_timer > 2.9:
+				velocity = Vector2.ZERO
 				state = 7
 			pass
 		6:
@@ -73,6 +77,8 @@ func _process(delta):
 				direction.y = 0
 				velocity = direction * speed
 			if ((bush_loc - global_position).length() < 10):
+				velocity = Vector2.ZERO
+				$Area2D.monitoring = false
 				state = 8
 		8:
 			get_parent().attack_over()
@@ -106,3 +112,12 @@ func _on_PhaseTimer_timeout():
 	state = 4
 	$PhaseTimer.stop()
 	pass # Replace with function body.
+
+
+func _on_Area2D_body_entered(body):
+	print_debug("HIT")
+	body.handle_damage(15)
+	state = 7
+	
+func handle_movement(delta):
+	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector2.UP, true, 4, 0.8)

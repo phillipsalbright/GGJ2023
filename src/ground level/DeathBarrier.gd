@@ -1,5 +1,4 @@
-extends StaticBody2D
-class_name BreakableWall
+extends Area2D
 
 
 # Declare member variables here. Examples:
@@ -16,6 +15,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func handle_damage(damage):
-	if (damage > 15):
-		queue_free();
+
+func _on_Area2D_body_entered(body):
+	body.handle_damage(body.health)
+	pass # Replace with function body.

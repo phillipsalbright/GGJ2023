@@ -27,7 +27,7 @@ func _process(delta):
 			$Camera2D.global_position += direction.normalized() * delta * 270
 	if boss_defeated:
 		var direction = (player_camera.global_position - $Camera2D.global_position)
-		if (direction.length() < 3):
+		if (direction.length() < 10):
 			$Camera2D.global_position = player_camera.global_position
 		else:
 			$Camera2D.global_position += direction.normalized() * delta * 270
@@ -41,6 +41,7 @@ func _on_Area2D_body_entered(body):
 		player_camera = get_parent().get_node("Player/Camera2D")
 		$Camera2D.current = true
 		get_node("BossTimer").start()
+		$StaticBody2D3.global_position.y = -36
 		$Area2D.disconnect("body_entered", $".", "_on_Area2D_body_entered")
 	pass # Replace with function body.
 
@@ -68,5 +69,5 @@ func _on_BossTimer_timeout():
 func rabbit_death():
 	$CanvasLayer/ProgressBar.visible = false
 	boss_defeated = true
-	$StaticBody2D3.queue_free()
+	$StaticBody2D4.queue_free()
 	pass
