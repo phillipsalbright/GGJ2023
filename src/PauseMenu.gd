@@ -31,10 +31,12 @@ func _process(delta):
 func _on_Button_pressed():
 	visible = false
 	root.paused = false
+	$ButtonSound.play()
 	pass # Replace with function body.
 
 
 func _on_Button2_pressed():
 	root.paused = false
+	$ButtonSound.play()
 	get_tree().change_scene("res://src/Main.tscn")
 	pass # Replace with function body.

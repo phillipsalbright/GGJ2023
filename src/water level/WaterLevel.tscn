@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/water level/WaterLevel.gd" type="Script" id=1]
 [ext_resource path="res://src/water level/WaterPlayer.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/Water Level Background.png" type="Texture" id=4]
 [ext_resource path="res://src/water level/WaterLevelUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/ground level/WinScreenGround.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/PauseMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 322, 16 )
@@ -15,6 +16,8 @@ extents = Vector2( 10, 173 )
 
 [node name="WaterLevel" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 7 )]
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 320, 180 )

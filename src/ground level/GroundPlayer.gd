@@ -85,6 +85,7 @@ func get_input_direction():
 		velocity.y = -jump_force
 		$AnimationPlayer.play("Jump")
 		snap_vector = Vector2.ZERO
+		$JumpSound.play()
 	if current_launch_timer <= 0:
 		if direction.x > 0:
 			sprite.flip_h = false

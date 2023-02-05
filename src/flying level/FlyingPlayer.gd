@@ -76,6 +76,7 @@ func get_input_direction():
 		snap_vector = Vector2.ZERO
 		jump_takeoff = true
 		$AnimationPlayer.play("take off")
+		$JumpSound.play()
 	
 	short_hop()
 
@@ -97,6 +98,7 @@ func _on_AirBoostDuration_timeout():
 
 func handle_damage(damage):
 	health -= damage
+	$HurtSound.play()
 	$HealthBar/TextureProgress.value = health
 	if health <= 0:
 		$DeathMenu.player_died()

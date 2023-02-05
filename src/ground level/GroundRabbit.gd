@@ -105,9 +105,11 @@ func set_state(state_change):
 func handle_damage(damage):
 	health -= damage
 	get_parent().get_node("CanvasLayer/TextureProgress").value = health
+	$HurtSound.play()
 	if (health < 0):
 		get_parent().rabbit_death()
 		queue_free()
+	
 
 
 func _on_BulletTimer_timeout():

@@ -38,6 +38,7 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("jump"):
 			$AnimationPlayer.play("jump")
+			$JumpSound.play()
 			jumping = true
 			spritev = -jump_force
 			storey = $Sprite.position.y
@@ -62,3 +63,5 @@ func handle_damage(damage):
 	$HealthBar/TextureProgress.value = health
 	if (health <= 0):
 		$DeathMenu.player_died()
+	
+	$HurtSound.play()

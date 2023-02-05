@@ -21,11 +21,13 @@ func _on_PlayGame_pressed():
 	$CanvasLayer.visible = false
 	$CanvasLayer2.visible = true
 	$CanvasLayer2/GroundLevel.grab_focus()
+	$ButtonSound.play()
 	pass # Replace with function body.
 
 
 func _on_Quit_pressed():
 	get_tree().quit()
+	$ButtonSound.play()
 	pass # Replace with function body.
 
 
@@ -48,4 +50,5 @@ func _on_Back_pressed():
 	$CanvasLayer.visible = true
 	$CanvasLayer2.visible = false
 	$CanvasLayer/PlayGame.grab_focus()
+	$ButtonSound.play()
 	pass # Replace with function body.

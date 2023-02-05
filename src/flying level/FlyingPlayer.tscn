@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/Player Fly.png" type="Texture" id=1]
 [ext_resource path="res://src/flying level/FlyingPlayer.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/UI Stuff/Player Health Bar (full).png" type="Texture" id=5]
 [ext_resource path="res://assets/UI Stuff/Player Health Bar (decor).png" type="Texture" id=6]
 [ext_resource path="res://src/ground level/WinScreenGround.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sfx/Hit_Hurt_Player.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sfx/Jump.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 12, 17 )
@@ -182,6 +184,14 @@ position = Vector2( -1.35416, 16.5 )
 shape = SubResource( 10 )
 
 [node name="WinScreen" parent="." instance=ExtResource( 7 )]
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -15.0
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -17.0
 
 [connection signal="timeout" from="AirBoostDuration" to="." method="_on_AirBoostDuration_timeout"]
 [connection signal="area_entered" from="Win detection" to="." method="_on_Win_detection_area_entered"]
