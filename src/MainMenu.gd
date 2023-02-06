@@ -20,7 +20,7 @@ func _ready():
 func _on_PlayGame_pressed():
 	$CanvasLayer.visible = false
 	$CanvasLayer2.visible = true
-	$CanvasLayer2/GroundLevel.grab_focus()
+	$CanvasLayer2/Back.grab_focus()
 	$ButtonSound.play()
 	pass # Replace with function body.
 
