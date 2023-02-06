@@ -9,6 +9,8 @@ var damage = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(global_position)
+	print(direction)
 	look_at(global_position + direction)
 
 

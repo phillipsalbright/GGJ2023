@@ -29,18 +29,21 @@ one_shot = true
 modulate = Color( 0, 1, 0.0156863, 1 )
 position = Vector2( -547, 262 )
 scale = Vector2( 2.418, 2.418 )
+z_index = -1
 texture = ExtResource( 4 )
 
 [node name="Bush2" type="Sprite" parent="."]
 modulate = Color( 0, 1, 0.0156863, 1 )
 position = Vector2( 0, -91 )
 scale = Vector2( 2.418, 2.418 )
+z_index = -1
 texture = ExtResource( 4 )
 
 [node name="Bush3" type="Sprite" parent="."]
 modulate = Color( 0, 1, 0.0156863, 1 )
 position = Vector2( 543.42, 262 )
 scale = Vector2( 2.418, 2.418 )
+z_index = -1
 texture = ExtResource( 4 )
 flip_h = true
 
@@ -56,7 +59,7 @@ limit_bottom = 120
 scale = Vector2( 1.2, 1.2 )
 
 [node name="RabbitStorageLoc" type="Node2D" parent="."]
-position = Vector2( 3.17468, -1225.47 )
+position = Vector2( -1025, -1279.35 )
 
 [node name="BetweenPhaseTimer" type="Timer" parent="."]
 
@@ -81,6 +84,7 @@ rect_scale = Vector2( 3, 3 )
 texture_under = ExtResource( 5 )
 texture_over = ExtResource( 6 )
 texture_progress = ExtResource( 2 )
+fill_mode = 1
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2( -693, -81.256 )

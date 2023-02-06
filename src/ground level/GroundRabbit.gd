@@ -43,7 +43,6 @@ func _process(delta):
 		4:
 			var ydist = abs(global_position.y - player.global_position.y)
 			local_timer = 0
-			print_debug(ydist)
 			if ydist < 50:
 				state = 5
 				player_target = sign(player.global_position.x - global_position.x)
@@ -114,10 +113,10 @@ func handle_damage(damage):
 
 func _on_BulletTimer_timeout():
 	var bullet = BULLET.instance()
-	get_parent().add_child(bullet)
 	bullet.direction = (player.global_position - global_position).normalized()
-	direction.x = sign(bullet.direction.x)
 	bullet.global_position = global_position
+	get_parent().get_parent().add_child(bullet)
+	direction.x = sign(bullet.direction.x)
 	pass # Replace with function body.
 
 

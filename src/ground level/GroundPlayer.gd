@@ -52,7 +52,7 @@ func _process(delta):
 			roll_time += delta
 			$AnimationPlayer.play("Charging")
 		elif roll_time > 0:
-			velocity.x = (roll_time + .12) * roll_launch_scale * last_direction + 75
+			velocity.x = (roll_time + .12) * roll_launch_scale * last_direction + 75*last_direction
 			velocity.y = roll_time * roll_launch_scale * -.1
 			$AnimationPlayer.play("Running")
 			current_launch_timer = roll_time * .7 + .3
@@ -99,7 +99,6 @@ func _on_Area2D_body_entered(body):
 	if body is GroundRabbit:
 		body.handle_damage(damage_to_deal)
 	if body is BreakableWall:
-		print_debug(damage_to_deal)
 		body.handle_damage(damage_to_deal)
 	if not body == self:
 		current_launch_timer = 0
@@ -109,7 +108,7 @@ func handle_damage(damage):
 	if (hurt_time <= 0 and current_launch_timer <= .2):
 		health -= damage
 		$AnimationPlayer2.play("Hurt")
-		hurt_time = 2
+		hurt_time = 1.5
 		if (health <= 0):
 			$DeathScreen.player_died()
 	$HealthBar/TextureProgress.value = health
